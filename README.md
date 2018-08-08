@@ -1,5 +1,7 @@
 # NboJavaDevs
- Android app to retrieve a list of Java Developers in Nairobi using the Github API 
+ Android app to retrieve a list of Java Developers in Nairobi using the Github API
+ [![CircleCI](https://circleci.com/gh/muthash/NboJavaDevs/tree/ft-connect-recyclerView-to-MainActivity-155768857.svg?style=svg)](https://circleci.com/gh/muthash/NboJavaDevs/tree/ft-connect-recyclerView-to-MainActivity-155768857)
+ [![Maintainability](https://api.codeclimate.com/v1/badges/7ee4c351f0e1887696bb/maintainability)](https://codeclimate.com/github/muthash/NboJavaDevs/maintainability) 
 
 
 ## Design Mockups
