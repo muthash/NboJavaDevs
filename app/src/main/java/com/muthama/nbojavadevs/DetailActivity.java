@@ -2,6 +2,10 @@ package com.muthama.nbojavadevs;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -9,5 +13,29 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        getIncomingIntent();
+    }
+
+    private void getIncomingIntent(){
+
+        if(getIntent().hasExtra("image_url") && getIntent().hasExtra("image_name")){
+            String imageUrl = getIntent().getStringExtra("image_url");
+            String imageName = getIntent().getStringExtra("image_name");
+
+            setImage(imageUrl, imageName);
+        }
+    }
+
+    private void setImage(String imageUrl, String imageName){
+        ImageView image = findViewById(R.id.detail_image);
+        Glide.with(this)
+                .asBitmap()
+                .load(imageUrl)
+                .into(image);
+
+        TextView name = findViewById(R.id.detail_name);
+        name.setText(imageName);
+
     }
 }
