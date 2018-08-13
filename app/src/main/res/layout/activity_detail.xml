@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="70"
+        android:id="@+id/detail_image"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-50dp"
+        android:text="Username"
+        android:textSize="35sp"
+        android:textColor="#ffffff"
+        />
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:id="@+id/detail_date"
+                android:text="Date Joined:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="#484141"/>
+
+            <TextView
+                android:id="@+id/detail_repos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Repositories:"
+                android:textColor="#484141"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/detail_followers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Followers:"
+                android:textSize="25sp"
+                android:textColor="#484141" />
+
+            <TextView
+                android:id="@+id/detail_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Language:"
+                android:textSize="25sp"
+                android:textColor="#484141" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
