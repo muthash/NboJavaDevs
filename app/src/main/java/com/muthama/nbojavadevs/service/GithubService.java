@@ -1,10 +1,21 @@
 package com.muthama.nbojavadevs.service;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GithubService {
-    private Retrofit retrofit = null;
+    private static Retrofit retrofit = null;
+    private static final String BASE_URL = "https://api.github.com/";
+
+    // Create logger
+    private static HttpLoggingInterceptor interceptor =
+            new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+
+    // Create OkHttp Client
+    private static OkHttpClient client =
+            new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
     /**
      * This method creates a new instance of the API interface.
@@ -12,7 +23,6 @@ public class GithubService {
      * @return The API interface
      */
     public GithubApi getAPI() {
-        String BASE_URL = "http://services.groupkt.com/";
 
         if (retrofit == null) {
             retrofit = new Retrofit

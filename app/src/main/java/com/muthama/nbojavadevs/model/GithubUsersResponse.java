@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 public class GithubUsersResponse {
     @SerializedName("items")
-    private ArrayList<GithubUsers> users;
+    public ArrayList<GithubUsers> users;
+
 
     public ArrayList<GithubUsers> getUsers(){
         return users;

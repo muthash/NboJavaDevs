@@ -1,8 +1,11 @@
 package com.muthama.nbojavadevs.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class GithubUsers {
+public class GithubUsers implements Parcelable {
 
     @SerializedName("avatar_url")
     private String imageUrl;
@@ -10,14 +13,27 @@ public class GithubUsers {
     @SerializedName("login")
     private String username;
 
-    @SerializedName("followers_url")
-    private String followers;
+    @SerializedName("html_url")
+    private String profileUrl;
 
-    public GithubUsers(String imageUrl, String username, String followers) {
-        this.imageUrl = imageUrl;
-        this.username = username;
-        this.followers = followers;
+    protected GithubUsers(Parcel in) {
+        username = in.readString();
+        imageUrl = in.readString();
+        profileUrl = in.readString();
+
     }
+
+    public static final Parcelable.Creator<GithubUsers> CREATOR = new Parcelable.Creator<GithubUsers>() {
+        @Override
+        public GithubUsers createFromParcel(Parcel in) {
+            return new GithubUsers(in);
+        }
+
+        @Override
+        public GithubUsers[] newArray(int size) {
+            return new GithubUsers[size];
+        }
+    };
 
     public String getImageUrl() {
         return imageUrl;
@@ -27,7 +43,15 @@ public class GithubUsers {
         return username;
     }
 
-    public String getFollowers() {
-        return followers;
+    public String getProfileUrl() { return profileUrl; }
+
+    @Override
+    public int describeContents() { return 0; }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(username);
+        parcel.writeString(imageUrl);
+        parcel.writeString(profileUrl);
     }
 }

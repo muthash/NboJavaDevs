@@ -1,4 +1,4 @@
-package com.muthama.nbojavadevs;
+package com.muthama.nbojavadevs.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.muthama.nbojavadevs.R;
 
 public class DetailActivity extends AppCompatActivity {
 
