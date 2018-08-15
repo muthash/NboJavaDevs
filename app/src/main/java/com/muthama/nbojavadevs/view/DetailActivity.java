@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.muthama.nbojavadevs.R;
+import com.muthama.nbojavadevs.model.GithubUsers;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -20,9 +21,11 @@ public class DetailActivity extends AppCompatActivity {
 
     private void getIncomingIntent(){
 
-        if(getIntent().hasExtra("image_url") && getIntent().hasExtra("image_name")){
-            String imageUrl = getIntent().getStringExtra("image_url");
-            String imageName = getIntent().getStringExtra("image_name");
+        if(getIntent().hasExtra("user")){
+            final GithubUsers user = getIntent().getParcelableExtra("user");
+
+            String imageUrl = user.getImageUrl();
+            String imageName = user.getUsername();
 
             setImage(imageUrl, imageName);
         }
@@ -37,6 +40,9 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView name = findViewById(R.id.detail_name);
         name.setText(imageName);
+
+        TextView smallName = findViewById(R.id.detail_small_name);
+        smallName.setText("@" + imageName);
 
     }
 }
