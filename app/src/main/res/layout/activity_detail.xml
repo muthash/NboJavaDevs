@@ -13,19 +13,8 @@
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detail_name"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-50dp"
-        android:text="Username"
-        android:textSize="35sp"
-        android:textColor="#000"
-        />
-
     <android.support.v7.widget.CardView
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -36,36 +25,28 @@
             android:layout_marginLeft="20dp">
 
             <TextView
-                android:id="@+id/detail_small_name"
+                android:id="@+id/detail_name"
                 android:text="This Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textColor="#000"/>
 
             <TextView
-                android:id="@+id/detail_repos"
+                android:id="@+id/detail_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Repositories:"
-                android:textColor="#484141"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/detail_followers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Followers:"
+                android:text="Profile Url"
                 android:textSize="25sp"
                 android:textColor="#484141" />
 
-            <TextView
-                android:id="@+id/detail_language"
-                android:layout_width="wrap_content"
+            <Button
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Language:"
-                android:textSize="25sp"
-                android:textColor="#484141" />
+                android:text="Share"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/share_button" />
 
         </LinearLayout>
 
