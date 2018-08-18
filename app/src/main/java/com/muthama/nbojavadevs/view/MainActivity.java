@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
         users = userList;
 
         // Setting up the Orientation
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         } else {
             mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
