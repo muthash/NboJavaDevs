@@ -1,5 +1,7 @@
 package com.muthama.nbojavadevs.presenter;
 
+import android.util.Log;
+
 import com.muthama.nbojavadevs.model.GithubUsers;
 import com.muthama.nbojavadevs.model.GithubUsersResponse;
 import com.muthama.nbojavadevs.service.GithubService;
@@ -10,6 +12,8 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class GithubPresenter implements UserView.MainPresenter{
 
@@ -35,6 +39,7 @@ public class GithubPresenter implements UserView.MainPresenter{
             }
             @Override
             public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: This is a fail");
                 try {
                     throw new InterruptedException("Something went wrong!");
                 } catch (InterruptedException e) {

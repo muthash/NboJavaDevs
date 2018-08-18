@@ -3,6 +3,7 @@ package com.muthama.nbojavadevs.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder
         CircleImageView rImage;
         TextView rImageName;
         TextView rImageRepos;
-        RelativeLayout parentLayout;
+        CardView parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -40,7 +41,7 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder
 
     }
 
-    public GithubAdapter(ArrayList<GithubUsers> users, Context mContext) {
+    public GithubAdapter(Context mContext, ArrayList<GithubUsers> users) {
         this.users = users;
         this.mContext = mContext;
     }
