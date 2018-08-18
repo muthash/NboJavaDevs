@@ -25,7 +25,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //  Display the back button
@@ -39,10 +39,9 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void initCollapsingToolbar(){
-        final CollapsingToolbarLayout collapsingToolbarLayout =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle("Java User: ");
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitle("Java Dev");
+        AppBarLayout appBarLayout = findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener(){
@@ -63,10 +62,10 @@ public class DetailActivity extends AppCompatActivity {
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0){
-                    collapsingToolbarLayout.setTitle("Java User: " + gitUserName);
+                    collapsingToolbarLayout.setTitle("Java Developer @" + gitUserName);
                     isShow = true;
                 } else if (isShow){
-                    collapsingToolbarLayout.setTitle("Java User: ");
+                    collapsingToolbarLayout.setTitle("Java Dev");
                     isShow = false;
                 }
             }

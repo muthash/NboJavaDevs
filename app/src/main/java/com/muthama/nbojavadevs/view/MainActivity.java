@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
     private final String USERS_LIST_KEY = "users_list";
     private RecyclerView mRecyclerView;
     private static Bundle mBundleRecyclerViewState;
-    private GithubAdapter adapter;
     private ArrayList<GithubUsers> users;
     ProgressDialog progressDialog;
 
@@ -47,19 +46,14 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
         mRecyclerView = findViewById(R.id.recycler_view);
 
 
-//        mBundleRecyclerViewState = savedInstanceState;
-//
-//        if (mBundleRecyclerViewState != null && mBundleRecyclerViewState.containsKey(USERS_LIST_KEY)){
-//
-//            restorePreviousState(); // Restore data found in the Bundle
-//
-//        }
-        if (savedInstanceState != null) {
-            users = savedInstanceState.getParcelableArrayList(USERS_LIST_KEY);
-            displayGithubUsers(users);
+        mBundleRecyclerViewState = savedInstanceState;
+
+        if (mBundleRecyclerViewState != null && mBundleRecyclerViewState.containsKey(USERS_LIST_KEY)){
+
+            restorePreviousState(); // Restore data found in the Bundle
+
         }else {
             // No saved data, get data from remote
-            Log.d("TA", "displayGithubUsers: " + users);
             presenter.getGithubUsers();
 
         }
@@ -77,12 +71,10 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
 
     @Override
     public void displayGithubUsers(ArrayList<GithubUsers> userList) {
-        Log.d("TAG", "displayGithubUsers: " + userList);
-
         users = userList;
 
         // Setting up the Orientation
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         } else {
             mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
@@ -91,12 +83,10 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
         RecyclerView.Adapter adapter = new GithubAdapter(this, users);
         mRecyclerView.setAdapter(adapter);
 
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-//        recyclerView.smoothScrollToPosition(0);
-//        adapter.notifyDataSetChanged();
+        mRecyclerView.smoothScrollToPosition(0);
+        adapter.notifyDataSetChanged();
 
         dismissDialog("200");
 
@@ -110,9 +100,9 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
 
         if (swipeRefreshLayout.isRefreshing()) {
             if ("200".equalsIgnoreCase(fetchStatus)) {
-                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(this, "users updated",
                         Toast.LENGTH_LONG).show();
+                swipeRefreshLayout.setRefreshing(false);
             } else {
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -141,21 +131,19 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
         return null;
     }
 
-//    public void restorePreviousState(){
-//        // restore RecyclerView state
-//        if (mBundleRecyclerViewState != null){
-//            Parcelable listState = mBundleRecyclerViewState.getParcelable(USERS_LIST_KEY);
-//            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
-//        }
-//    }
+    public void restorePreviousState(){
+        // restore RecyclerView state
+        if (mBundleRecyclerViewState != null){
+            Parcelable listState = mBundleRecyclerViewState.getParcelable(USERS_LIST_KEY);
+            mRecyclerView.getLayoutManager().onRestoreInstanceState(listState);
+        }
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-//        mBundleRecyclerViewState = new Bundle();
-//        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
-//        mBundleRecyclerViewState.putParcelable(USERS_LIST_KEY, listState);
-//        super.onSaveInstanceState(outState);
+        mBundleRecyclerViewState = new Bundle();
+        Parcelable listState = mRecyclerView.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable(USERS_LIST_KEY, listState);
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(USERS_LIST_KEY, users);
     }
 }

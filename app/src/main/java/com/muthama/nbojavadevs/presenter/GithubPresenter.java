@@ -29,6 +29,7 @@ public class GithubPresenter implements UserView.MainPresenter{
 
     @Override
     public void getGithubUsers() {
+
         githubService.getAPI().getUsers().enqueue(new Callback<GithubUsersResponse>() {
             @Override
             public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
@@ -39,7 +40,8 @@ public class GithubPresenter implements UserView.MainPresenter{
             }
             @Override
             public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
-                Log.d(TAG, "onFailure: This is a fail");
+                Log.d("Error", t.getMessage());
+
                 try {
                     throw new InterruptedException("Something went wrong!");
                 } catch (InterruptedException e) {
