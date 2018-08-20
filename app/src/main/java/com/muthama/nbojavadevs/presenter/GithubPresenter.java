@@ -6,6 +6,7 @@ import com.muthama.nbojavadevs.model.GithubUsers;
 import com.muthama.nbojavadevs.model.GithubUsersResponse;
 import com.muthama.nbojavadevs.service.GithubService;
 import com.muthama.nbojavadevs.view.UserView;
+import com.muthama.util.NetworkCheck;
 
 import java.util.ArrayList;
 
@@ -36,17 +37,15 @@ public class GithubPresenter implements UserView.MainPresenter{
                 ArrayList<GithubUsers> githubUsers = response.body().getUsers();
                 if (githubUsers != null) {
                     userView.displayGithubUsers(githubUsers);
+                }else {
+                    userView.displaySnackBar(true);
                 }
             }
             @Override
             public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
                 Log.d("Error", t.getMessage());
 
-                try {
-                    throw new InterruptedException("Something went wrong!");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                userView.displaySnackBar(false);
             }
         });
 
@@ -54,6 +53,7 @@ public class GithubPresenter implements UserView.MainPresenter{
 
     @Override
     public boolean getNetworkConnectionState() {
-        return false;
+
+        return NetworkCheck.getConnectionStatus(userView.getViewContext());
     }
 }
