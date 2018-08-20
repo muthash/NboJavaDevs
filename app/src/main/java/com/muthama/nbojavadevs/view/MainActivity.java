@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.recycler_view);
+        swipeRefreshLayout = findViewById(R.id.main_content);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_dark);
 
 
         mBundleRecyclerViewState = savedInstanceState;
@@ -63,9 +65,6 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
                 displaySnackBar(false);
             }
         }
-
-        swipeRefreshLayout = findViewById(R.id.main_content);
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_dark);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -154,17 +153,16 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
 
     @Override
     public void displaySnackBar(boolean networkStatus) {
+        int status_text = R.string.no_connection;
+        if (networkStatus) {
+            status_text = R.string.failed_connection;
+        }
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
             swipeRefreshLayout.setRefreshing(false);
         }
-        int status = R.string.no_connection;
-
-        if (networkStatus) {
-            status = R.string.failed_connection;
-        }
         snackbar = Snackbar
-                .make(swipeRefreshLayout, status, Snackbar.LENGTH_INDEFINITE)
+                .make(swipeRefreshLayout, status_text, Snackbar.LENGTH_INDEFINITE)
                 .setAction("Try Again", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -173,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements UserView.MainView
                 });
 
         snackbar.setActionTextColor(Color.CYAN);
-
         View sbView = snackbar.getView();
         TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
