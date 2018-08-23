@@ -11,10 +11,6 @@ public interface UserView {
         void displayGithubUsers(ArrayList<GithubUsers> userList);
 
         void dismissDialog(String fetchStatus);
-
-        void displaySnackBar(boolean networkStatus);
-
-        Context getViewContext();
     }
     interface MainPresenter {
         void getGithubUsers();

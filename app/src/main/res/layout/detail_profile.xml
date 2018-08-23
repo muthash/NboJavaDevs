@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/viewBg"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_detail">
+
+
+
+    <LinearLayout
+        android:id="@+id/ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:showIn="@layout/activity_detail">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_margin">
+
+            <LinearLayout
+                style="@style/Widget.CardContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/detail_name"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/padding_layout"
+                    android:paddingEnd="@dimen/padding_layout"
+                    android:layout_marginTop="@dimen/layout_margin_top"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"
+                    android:paddingBottom="7dp"
+                    android:text="@string/username" />
+
+                <TextView
+                    android:id="@+id/detail_profile"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/padding_layout"
+                    android:paddingEnd="@dimen/padding_layout"
+                    android:paddingBottom="@dimen/padding_layout"
+                    android:layout_marginTop="@dimen/layout_margin_top"
+                    android:text="@string/profile_url"
+                    android:textSize="20sp"
+                    android:autoLink="web" />
+
+                <Button
+                    android:id="@+id/share_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share"
+                    android:textColor="@android:color/white"
+                    android:theme="@style/shareButton"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:elevation="8dp" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
