@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Nairobi Java Developers</string>
+    <string name="user_details">User Details</string>
+    <string name="username">Username:</string>
+    <string name="profile_url">Profile Url:</string>
+    <string name="share">Share Profile</string>
+    <string name="no_connection">No internet connection</string>
+    <string name="failed_connection">Bad internet Connection</string>
+</resources>
