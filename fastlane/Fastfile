@@ -1,0 +1,44 @@
+default_platform(:android)
+
+platform :android do
+  before_all do
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+  end
+
+  desc "Deploy a new Mock APK to #fastlane-sandbox Slack channel"
+  lane :slackbuild do
+    gradle(task: "assembleRelease")
+    slack(message: "Build Successful!")
+    upload_to_slack()
+  end
+
+  desc "Build a new APK"
+  private_lane :build do |options|
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+      print_command: false
+    )
+  end
+
+  desc "Upload the latest output APK to #fastlane-sandbox Slack channel"
+  private_lane :upload_to_slack do |options|
+    file_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+    file_name = file_path.gsub(/\/.*\//,"")
+    api_token = ENV["SLACK_TOKEN"]
+    sh "echo Uploading " + file_name + " to Slack"
+    sh "curl https://slack.com/api/files.upload -F token=" + api_token + " -F channels=\"fastlane-sandbox\" -F title=\"" + file_name + "\" -F filename=\"" + file_name + "\" -F file=@" + file_path
+  end
+
+  after_all do |lane|
+    file_name = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH].gsub(/\/.*\//,"")
+    slack(
+      message: "App released successfully!",
+      payload: {
+        # Optional, lets you specify any number of your own Slack attachments.
+        "Build Date" => Time.new.to_s,
+        "APK" => file_name
+      }
+    )
+  end
+end
