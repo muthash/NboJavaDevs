@@ -1,15 +1,20 @@
 package com.muthama.nbojavadevs.presenter;
 
+import android.util.Log;
+
 import com.muthama.nbojavadevs.model.GithubUsers;
 import com.muthama.nbojavadevs.model.GithubUsersResponse;
 import com.muthama.nbojavadevs.service.GithubService;
 import com.muthama.nbojavadevs.view.UserView;
+import com.muthama.util.NetworkCheck;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class GithubPresenter implements UserView.MainPresenter{
 
@@ -25,21 +30,22 @@ public class GithubPresenter implements UserView.MainPresenter{
 
     @Override
     public void getGithubUsers() {
+
         githubService.getAPI().getUsers().enqueue(new Callback<GithubUsersResponse>() {
             @Override
             public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
                 ArrayList<GithubUsers> githubUsers = response.body().getUsers();
                 if (githubUsers != null) {
                     userView.displayGithubUsers(githubUsers);
+                }else {
+                    userView.displaySnackBar(true);
                 }
             }
             @Override
             public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
-                try {
-                    throw new InterruptedException("Something went wrong!");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Log.d("Error", t.getMessage());
+
+                userView.displaySnackBar(false);
             }
         });
 
@@ -47,6 +53,7 @@ public class GithubPresenter implements UserView.MainPresenter{
 
     @Override
     public boolean getNetworkConnectionState() {
-        return false;
+
+        return NetworkCheck.getConnectionStatus(userView.getViewContext());
     }
 }
